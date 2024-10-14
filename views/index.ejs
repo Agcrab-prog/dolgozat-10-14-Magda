@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Foglalás</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Foglalási űrlap</h1>
+        <form action="/book" method="POST">
+            <div class="form-group">
+                <label for="name">Név</label>
+                <input type="text" class="form-control" id="name" name="name" value="<%= formData.name %>" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail cím</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%= formData.email %>" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Dátum és időpont</label>
+                <input type="datetime-local" class="form-control" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="guests">Nézők/Vendégek száma</label>
+                <input type="number" class="form-control" id="guests" name="guests" min="1" max="10" value="<%= formData.guests %>" required>
+            </div>
+            <% if (errors) { %>
+                <div class="alert alert-danger" role="alert">
+                    <% errors.forEach(function(error) { %>
+                        <p><%= error.constraints ? Object.values(error.constraints).join(', ') : '' %></p>
+                    <% }); %>
+                </div>
+            <% } %>
+            <button type="submit" class="btn btn-primary">Foglalás</button>
+        </form>
+    </div>
+</body>
+</html>
